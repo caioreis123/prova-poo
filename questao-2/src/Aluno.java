@@ -3,6 +3,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class Aluno {
+    public String nome;
     private Curso cursoMatriculado;
     private Set<Disciplina> disciplinasMatriculadas;
     private HashMap<Disciplina, Float>  disciplinasCursadasENotas;
@@ -12,7 +13,8 @@ public class Aluno {
     private Boolean isExAluno;
 //    Quando um aluno realiza todas as disciplinas do curso, deixa de ser aluno e passa a ser ex-aluno.
 
-    public Aluno(Curso cursoMatriculado) {
+    public Aluno(Curso cursoMatriculado, String nome) {
+        this.nome = nome;
         this.cursoMatriculado = cursoMatriculado;
         this.isExAluno = false;
         this.disciplinasRestantes.addAll(cursoMatriculado.disciplinas);
