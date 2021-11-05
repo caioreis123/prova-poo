@@ -8,7 +8,7 @@ public class Aluno {
     private Set<Disciplina> disciplinasMatriculadas;
     private HashMap<Disciplina, Float>  disciplinasCursadasENotas;
     private Set<Disciplina>  disciplinasRestantes;
-    private Set<Horario> horarios;
+    private HashSet<String> horarios;
 //    esses horários são agregados das disciplinas matriculadas
     private Boolean isExAluno;
 //    Quando um aluno realiza todas as disciplinas do curso, deixa de ser aluno e passa a ser ex-aluno.
@@ -35,7 +35,7 @@ public class Aluno {
         }
     }
 
-    public Set<Horario> getHorarios(){
+    public HashSet<String> getHorarios(){
         atualizaHorarios();
         return horarios;
     }

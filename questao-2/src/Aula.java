@@ -1,23 +1,14 @@
 import java.util.HashSet;
+import java.util.Set;
 
 public class Aula{
-    private HashSet<Horario> horarios;
+    public String horaInicio;
+    private String duracao;
+    private String dia;
 
-    public Aula(HashSet<Horario> horarios){
-        this.horarios = horarios;
-    }
-
-    public HashSet<Horario> getHorarios(){
-        return horarios;
-    }
-
-    public HashSet<Horario> adicionarHorario(Horario horario){
-        horarios.add(horario);
-        return horarios;
-    }
-
-    public HashSet<Horario> removerHorario(Horario horario){
-        horarios.remove(horario);
-        return horarios;
+    public Aula(String horaInicio, String duracao, String dia) {
+        this.horaInicio = horaInicio;
+        this.duracao = duracao;
+        this.dia = dia;
     }
 }

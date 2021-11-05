@@ -4,7 +4,7 @@ import java.util.Set;
 public class Curso {
     private String nome;
     public Set<Disciplina> disciplinas;
-    private Set<Horario> horarios;
+    private HashSet<String> horarios;
     //    esse conjunto de horários é obtido agregando os horários de cada disciplina
 
     public Curso(String nome, Set<Disciplina> disciplinas) {
@@ -13,7 +13,7 @@ public class Curso {
         this.horarios = getHorarios(disciplinas);
     }
 
-    private Set<Horario> getHorarios(Set<Disciplina> disciplinas) {
+    private HashSet<String> getHorarios(Set<Disciplina> disciplinas) {
         atualizaHorariosDeDisciplinas(disciplinas);
         return this.horarios;
     }
