@@ -10,8 +10,6 @@ public class Disciplina {
     private HashSet<Aula> aulas;
     private String docente;
     public HashSet<String> horarios = new HashSet<String>();
-//    os horários são obtidos agregando os horários de cada aula
-//    uma disciplina pode fazer parte de mais do que um horário
 
     public Disciplina(String codigo, String sigla, String nome, HashSet<Aula> aulas, String docente) {
         this.codigo = codigo;
@@ -34,6 +32,3 @@ public class Disciplina {
         return horarios;
     }
 }
-
-//podem existir disciplinas com o mesmo nome e o mesmo docente e datas a cursos
-//diferentes, no entanto as disciplinas têm de ter códigos diferentes

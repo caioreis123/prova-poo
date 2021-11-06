@@ -9,8 +9,6 @@ public class Curso {
     public HashSet<Aluno> alunos;
     public StringBuilder exAlunos = new StringBuilder();
 
-    //    esse conjunto de horários é obtido agregando os horários de cada disciplina
-
     public Curso(String nome, Set<Disciplina> disciplinas) {
         this.nome = nome;
         this.disciplinas = disciplinas;

@@ -9,9 +9,7 @@ public class Aluno {
     public HashMap<Disciplina, Float>  disciplinasCursadasENotas;
     public Set<Disciplina>  disciplinasRestantes;
     private HashSet<String> horarios;
-//    esses horários são agregados das disciplinas matriculadas
     private Boolean isExAluno;
-//    Quando um aluno realiza todas as disciplinas do curso, deixa de ser aluno e passa a ser ex-aluno.
 
     public Aluno(Curso cursoMatriculado, String nome) {
         this.nome = nome;

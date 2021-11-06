@@ -59,7 +59,7 @@ public class UserInterface {
                 aulas.add(aula2);
                 Disciplina disciplina = new Disciplina(codigo, sigla, nome, aulas, professor);
                 System.out.println(disciplina);
-                todasDisciplinas.put(sigla, disciplina);
+                todasDisciplinas.put(codigo, disciplina);
             }
         });
         adicionarDisciplinasAoCursoButton.addActionListener(new ActionListener() {
@@ -67,10 +67,10 @@ public class UserInterface {
             public void actionPerformed(ActionEvent e) {
                 HashSet<Disciplina> disciplinasASeremAdicionadasAoCurso = new HashSet<>();
                 String nome = cursoNome.getText().toUpperCase();
-                String[] siglas = disciplinasDoCurso.getText().split(",");
-                for (String sigla : siglas) {
-                    sigla = sigla.trim().toUpperCase();
-                    Disciplina disciplina = todasDisciplinas.get(sigla);
+                String[] codigos = disciplinasDoCurso.getText().split(",");
+                for (String cod : codigos) {
+                    cod = cod.trim().toUpperCase();
+                    Disciplina disciplina = todasDisciplinas.get(cod);
                     disciplinasASeremAdicionadasAoCurso.add(disciplina);
                 }
                 if (todosCursos.containsKey(nome)) {
@@ -88,11 +88,11 @@ public class UserInterface {
             public void actionPerformed(ActionEvent e) {
                 String nome = cursoNome.getText();
                 Curso curso = todosCursos.get(nome);
-                String[] siglas = disciplinasDoCurso.getText().split(",");
+                String[] codigos = disciplinasDoCurso.getText().split(",");
                 HashSet<Disciplina> disciplinasASeremRemovidasDoCurso = new HashSet<>();
-                for (String sigla : siglas) {
-                    sigla = sigla.trim().toUpperCase();
-                    Disciplina disciplina = todasDisciplinas.get(sigla);
+                for (String cod : codigos) {
+                    cod = cod.trim().toUpperCase();
+                    Disciplina disciplina = todasDisciplinas.get(cod);
                     disciplinasASeremRemovidasDoCurso.add(disciplina);
                 }
                 curso.removerDisciplinas(disciplinasASeremRemovidasDoCurso);
@@ -100,8 +100,6 @@ public class UserInterface {
             }
         });
         listarAlunosDoCursoButton.addActionListener(new ActionListener() {
-//            Listagem dos alunos de um dado curso, indicando para cada um deles as disciplinas
-//            que já concluíram e as que lhe falta concluir.
             @Override
             public void actionPerformed(ActionEvent e) {
                 String nome = cursoNome.getText();
@@ -124,13 +122,13 @@ public class UserInterface {
             public void actionPerformed(ActionEvent e) {
                 String nome = cursoNome.getText();
                 String nomeAluno = alunoNome.getText();
-                String[] disciplinasNomes = alunoDisciplinasParaMatricula.getText().split(",");
+                String[] codigos = alunoDisciplinasParaMatricula.getText().split(",");
                 Curso curso = todosCursos.get(nome);
                 Aluno aluno = new Aluno(curso, nomeAluno);
                 HashSet<Disciplina> disciplinasASeremMatriculadas = new HashSet<>();
-                for (String sigla : disciplinasNomes) {
-                    sigla = sigla.trim().toUpperCase();
-                    Disciplina disciplina = todasDisciplinas.get(sigla);
+                for (String cod : codigos) {
+                    cod = cod.trim().toUpperCase();
+                    Disciplina disciplina = todasDisciplinas.get(cod);
                     aluno.matricularAlunoEmDisciplina(disciplina);
                 }
                 todosAlunos.put(nomeAluno, aluno);
@@ -140,9 +138,9 @@ public class UserInterface {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String nomeAluno = alunoNome.getText();
-                String sigla = alunoDisciplinaParaNota.getText();
+                String codigo = alunoDisciplinaParaNota.getText();
                 Aluno aluno = todosAlunos.get(nomeAluno);
-                Disciplina disciplina = todasDisciplinas.get(sigla);
+                Disciplina disciplina = todasDisciplinas.get(codigo);
                 aluno.lancarNota(disciplina, Float.parseFloat(alunoNota.getText()));
             }
         });
@@ -155,21 +153,6 @@ public class UserInterface {
             }
         });
     }
-
-//        horario é horaInicio, duracao e dia da semana
-
-//        alterar horário de aula
-//        criar disciplina passando conjunto de aulas
-//        criar curso passando lista de disciplinas
-//        adicionar disciplina do curso
-//        remover disciplina do curso
-
-//        matricular aluno em disciplinas e em curso
-//        listar horário do aluno
-//        lançar notas de uma disciplina de um aluno em um curso
-
-//        listar ex-alunos
-//        listar alunos de um curso indicando as disciplinas que já concluiram e que faltam concluir
 
     public static void main(String[] args) {
         JFrame frame = new JFrame("UserInterface");
