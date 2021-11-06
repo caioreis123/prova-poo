@@ -43,23 +43,28 @@ public class UserInterface {
             public void actionPerformed(ActionEvent e) {
                 String nome = disciplinaNome.getText();
                 String codigo = disciplinaCodigo.getText();
-                String sigla = disciplinaSigla.getText().toUpperCase();
-                String hora1 = disciplinaHora1.getText();
-                String hora2 = disciplinaHora2.getText();
-                String duracao1 = disciplinaDuracao1.getText();
-                String duracao2 = disciplinaDuracao2.getText();
-                String professor = docente.getText();
-                String dia1 = disciplinaDia1.getText();
-                String dia2 = disciplinaDia2.getText();
+                if (todasDisciplinas.containsKey(codigo)) {
+                    JOptionPane.showMessageDialog(null, "Disciplina já existente");
+                }
+                else {
+                    String sigla = disciplinaSigla.getText().toUpperCase();
+                    String hora1 = disciplinaHora1.getText();
+                    String hora2 = disciplinaHora2.getText();
+                    String duracao1 = disciplinaDuracao1.getText();
+                    String duracao2 = disciplinaDuracao2.getText();
+                    String professor = docente.getText();
+                    String dia1 = disciplinaDia1.getText();
+                    String dia2 = disciplinaDia2.getText();
 
-                Aula aula1 = new Aula(hora1, duracao1, dia1);
-                Aula aula2 = new Aula(hora2, duracao2, dia2);
-                HashSet<Aula> aulas = new HashSet<>();
-                aulas.add(aula1);
-                aulas.add(aula2);
-                Disciplina disciplina = new Disciplina(codigo, sigla, nome, aulas, professor);
-                System.out.println(disciplina);
-                todasDisciplinas.put(codigo, disciplina);
+                    Aula aula1 = new Aula(hora1, duracao1, dia1);
+                    Aula aula2 = new Aula(hora2, duracao2, dia2);
+                    HashSet<Aula> aulas = new HashSet<>();
+                    aulas.add(aula1);
+                    aulas.add(aula2);
+                    Disciplina disciplina = new Disciplina(codigo, sigla, nome, aulas, professor);
+                    System.out.println(disciplina);
+                    todasDisciplinas.put(codigo, disciplina);
+                }
             }
         });
         adicionarDisciplinasAoCursoButton.addActionListener(new ActionListener() {
