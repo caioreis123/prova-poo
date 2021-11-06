@@ -179,7 +179,7 @@
           </grid>
         </constraints>
         <properties>
-          <text value="POO, BD"/>
+          <text value="POO"/>
         </properties>
       </component>
       <component id="19ce4" class="javax.swing.JButton" binding="adicionarDisciplinasAoCursoButton" default-binding="true">
@@ -265,7 +265,7 @@
           </grid>
         </constraints>
         <properties>
-          <text value="POO, BD"/>
+          <text value="POO"/>
         </properties>
       </component>
       <component id="5f165" class="javax.swing.JButton" binding="listarHoráriosDoAlunoButton" default-binding="true">

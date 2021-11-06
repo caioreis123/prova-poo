@@ -6,8 +6,8 @@ public class Aluno {
     public String nome;
     private Curso cursoMatriculado;
     private Set<Disciplina> disciplinasMatriculadas;
-    private HashMap<Disciplina, Float>  disciplinasCursadasENotas;
-    private Set<Disciplina>  disciplinasRestantes;
+    public HashMap<Disciplina, Float>  disciplinasCursadasENotas;
+    public Set<Disciplina>  disciplinasRestantes;
     private HashSet<String> horarios;
 //    esses horários são agregados das disciplinas matriculadas
     private Boolean isExAluno;
@@ -17,7 +17,11 @@ public class Aluno {
         this.nome = nome;
         this.cursoMatriculado = cursoMatriculado;
         this.isExAluno = false;
+        this.disciplinasRestantes = new HashSet<>();
+        this.disciplinasMatriculadas = new HashSet<>();
+        this.disciplinasCursadasENotas = new HashMap<>();
         this.disciplinasRestantes.addAll(cursoMatriculado.disciplinas);
+        cursoMatriculado.adicionarAluno(this);
     }
 
     public void matricularAlunoEmDisciplina(Disciplina disciplina) {
@@ -32,18 +36,21 @@ public class Aluno {
         atualizaHorarios();
         if (this.disciplinasRestantes.isEmpty()) {
             this.isExAluno = true;
+            this.cursoMatriculado.exAlunos.append(this.nome + " ");
+            this.cursoMatriculado.alunos.remove(this);
         }
     }
 
-    public HashSet<String> getHorarios(){
+    public String getHorarios(){
         atualizaHorarios();
-        return horarios;
+        return String.join(", ", horarios);
     }
 
-    private void atualizaHorarios() {
-        horarios.clear();
+    private HashSet<String> atualizaHorarios() {
+        this.horarios = new HashSet<>();
         for (Disciplina disciplina : disciplinasMatriculadas){
-            horarios.addAll(disciplina.horarios);
+            this.horarios.addAll(disciplina.horarios);
         }
+        return this.horarios;
     }
 }

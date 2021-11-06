@@ -22,6 +22,11 @@ public class Disciplina {
         this.horarios = getHorarios(aulas);
     }
 
+    @Override
+    public String toString(){
+        return this.sigla;
+    }
+
     private HashSet<String> getHorarios(HashSet<Aula> aulas) {
         for (Aula aula : aulas){
             horarios.add(aula.horaInicio);

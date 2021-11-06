@@ -35,6 +35,7 @@ public class UserInterface {
     private JButton listarExAlunosButton;
     private HashMap<String, Disciplina> todasDisciplinas = new HashMap<>();
     private HashMap<String, Curso> todosCursos = new HashMap<>();
+    private HashMap<String, Aluno> todosAlunos = new HashMap<>();
 
     public UserInterface() {
 
@@ -97,6 +98,59 @@ public class UserInterface {
                 }
                 curso.removerDisciplinas(disciplinasASeremRemovidasDoCurso);
                 System.out.println(curso);
+            }
+        });
+        listarAlunosDoCursoButton.addActionListener(new ActionListener() {
+//            Listagem dos alunos de um dado curso, indicando para cada um deles as disciplinas
+//            que já concluíram e as que lhe falta concluir.
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String nome = cursoNome.getText();
+                Curso curso = todosCursos.get(nome);
+                listagemDeAlunos.setText(curso.listarAlunos());
+            }
+        });
+        listarExAlunosButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String nome = cursoNome.getText();
+                Curso curso = todosCursos.get(nome);
+                listagemDeAlunos.setText(String.format("Ex-alunos: %s", curso.exAlunos));
+            }
+        });
+        matricularAlunoButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String nome = cursoNome.getText();
+                String nomeAluno = alunoNome.getText();
+                String[] disciplinasNomes = alunoDisciplinasParaMatricula.getText().split(",");
+                Curso curso = todosCursos.get(nome);
+                Aluno aluno = new Aluno(curso, nomeAluno);
+                HashSet<Disciplina> disciplinasASeremMatriculadas = new HashSet<>();
+                for (String sigla : disciplinasNomes) {
+                    sigla = sigla.trim().toUpperCase();
+                    Disciplina disciplina = todasDisciplinas.get(sigla);
+                    aluno.matricularAlunoEmDisciplina(disciplina);
+                }
+                todosAlunos.put(nomeAluno, aluno);
+            }
+        });
+        lançarNotaButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String nomeAluno = alunoNome.getText();
+                String sigla = alunoDisciplinaParaNota.getText();
+                Aluno aluno = todosAlunos.get(nomeAluno);
+                Disciplina disciplina = todasDisciplinas.get(sigla);
+                aluno.lancarNota(disciplina, Float.parseFloat(alunoNota.getText()));
+            }
+        });
+        listarHoráriosDoAlunoButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String nomeAluno = alunoNome.getText();
+                Aluno aluno = todosAlunos.get(nomeAluno);
+                listagemDeAlunos.setText(aluno.getHorarios());
             }
         });
     }
