@@ -106,6 +106,7 @@ public class UserInterface {
             public void actionPerformed(ActionEvent e) {
                 String nome = cursoNome.getText();
                 Curso curso = todosCursos.get(nome);
+                listagemDeAlunos.setText("");
                 listagemDeAlunos.setText(curso.listarAlunos());
             }
         });
@@ -114,7 +115,8 @@ public class UserInterface {
             public void actionPerformed(ActionEvent e) {
                 String nome = cursoNome.getText();
                 Curso curso = todosCursos.get(nome);
-                listagemDeAlunos.setText(String.format("Ex-alunos: %s", curso.exAlunos));
+                listagemDeAlunos.setText("");
+                listagemDeAlunos.setText(String.format("Ex-alunos: %s", curso.exAlunos.toString()));
             }
         });
         matricularAlunoButton.addActionListener(new ActionListener() {

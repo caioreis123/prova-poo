@@ -36,7 +36,7 @@ public class Aluno {
         atualizaHorarios();
         if (this.disciplinasRestantes.isEmpty()) {
             this.isExAluno = true;
-            this.cursoMatriculado.exAlunos.append(this.nome + " ");
+            this.cursoMatriculado.exAlunos.append(this.nome + ", ");
             this.cursoMatriculado.alunos.remove(this);
         }
     }
