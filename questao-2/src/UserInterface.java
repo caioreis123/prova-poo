@@ -28,7 +28,6 @@ public class UserInterface {
     private JButton lançarNotaButton;
     private JTextField alunoDisciplinaParaNota;
     private JTextField alunoNota;
-    private JTextPane listagemDeHorarios;
     private JButton listarHoráriosDoAlunoButton;
     private JButton listarAlunosDoCursoButton;
     private JTextArea listagemDeAlunos;
