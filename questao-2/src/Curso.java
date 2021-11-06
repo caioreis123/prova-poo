@@ -25,13 +25,15 @@ public class Curso {
         }
     }
 
-    public void adicionarDisciplina(Disciplina disciplina) {
-        disciplinas.add(disciplina);
+    public void adicionarDisciplinas(HashSet<Disciplina> disciplinas) {
+        this.disciplinas.addAll(disciplinas);
         atualizaHorariosDeDisciplinas(disciplinas);
     }
 
-    public void removeDisciplina(Disciplina disciplina) {
-        disciplinas.remove(disciplina);
-        atualizaHorariosDeDisciplinas(disciplinas);
+    public void removerDisciplinas(HashSet<Disciplina> disciplinas) {
+        this.disciplinas.removeAll(disciplinas);
+        for (Disciplina disciplina : disciplinas) {
+            this.horarios.removeAll(disciplina.horarios);
+        }
     }
 }

@@ -33,7 +33,8 @@ public class UserInterface {
     private JButton listarAlunosDoCursoButton;
     private JTextArea listagemDeAlunos;
     private JButton listarExAlunosButton;
-    private HashMap<String, Disciplina> disciplinas = new HashMap<>();
+    private HashMap<String, Disciplina> todasDisciplinas = new HashMap<>();
+    private HashMap<String, Curso> todosCursos = new HashMap<>();
 
     public UserInterface() {
 
@@ -42,7 +43,7 @@ public class UserInterface {
             public void actionPerformed(ActionEvent e) {
                 String nome = disciplinaNome.getText();
                 String codigo = disciplinaCodigo.getText();
-                String sigla = disciplinaSigla.getText();
+                String sigla = disciplinaSigla.getText().toUpperCase();
                 String hora1 = disciplinaHora1.getText();
                 String hora2 = disciplinaHora2.getText();
                 String duracao1 = disciplinaDuracao1.getText();
@@ -58,7 +59,44 @@ public class UserInterface {
                 aulas.add(aula2);
                 Disciplina disciplina = new Disciplina(codigo, sigla, nome, aulas, professor);
                 System.out.println(disciplina);
-                disciplinas.put(sigla, disciplina);
+                todasDisciplinas.put(sigla, disciplina);
+            }
+        });
+        adicionarDisciplinasAoCursoButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                HashSet<Disciplina> disciplinasASeremAdicionadasAoCurso = new HashSet<>();
+                String nome = cursoNome.getText().toUpperCase();
+                String[] siglas = disciplinasDoCurso.getText().split(",");
+                for (String sigla : siglas) {
+                    sigla = sigla.trim().toUpperCase();
+                    Disciplina disciplina = todasDisciplinas.get(sigla);
+                    disciplinasASeremAdicionadasAoCurso.add(disciplina);
+                }
+                if (todosCursos.containsKey(nome)) {
+                    Curso curso = todosCursos.get(nome);
+                    curso.adicionarDisciplinas(disciplinasASeremAdicionadasAoCurso);
+                }
+                else{
+                    Curso curso = new Curso(nome, disciplinasASeremAdicionadasAoCurso);
+                    todosCursos.put(nome, curso);
+                }
+            }
+        });
+        removerDisciplinasDoCursoButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String nome = cursoNome.getText();
+                Curso curso = todosCursos.get(nome);
+                String[] siglas = disciplinasDoCurso.getText().split(",");
+                HashSet<Disciplina> disciplinasASeremRemovidasDoCurso = new HashSet<>();
+                for (String sigla : siglas) {
+                    sigla = sigla.trim().toUpperCase();
+                    Disciplina disciplina = todasDisciplinas.get(sigla);
+                    disciplinasASeremRemovidasDoCurso.add(disciplina);
+                }
+                curso.removerDisciplinas(disciplinasASeremRemovidasDoCurso);
+                System.out.println(curso);
             }
         });
     }
